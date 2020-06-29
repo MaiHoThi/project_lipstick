@@ -33,15 +33,10 @@ if(!Auth::user()){
 }else
     if(Auth::user()->role=='user')
     {
-      $idUser = Auth::user()->id;
-   
-      $products = DB::table('carts')
-      ->where('user_id','=',$idUser)
-      ->join('users','users.id','=','carts.user_id')
-      ->join('products','products.id', '=', 'carts.product_id')
-      ->select('carts.id','products.name', 'products.price', 'products.sale', 'products.image','carts.quantity')
-      ->get();
-   
+        $total=0;
+    $idUser=Auth::user()->id;
+    $products = Cart::where('user_id',$idUser)->get();
+ 
            // echo "<pre>".json_encode($products,JSON_PRETTY_PRINT)."</pre>";
              return view("auth.shopping_cart",['carts'=>$products]);
     }else if(Auth::user()->role=='admin'){
@@ -54,40 +49,40 @@ if(!Auth::user()){
 
 
 
-function storecart( $id,Request $request)
+function storecart( $id)
 {
     // $id_user = User::find('id');
 
 $id_user=Auth::user()->id;
 $product_id= Product::find($id);
 $id_product= $product_id->id;
-$quantity=1;
+// $quantity=1;
 
-//$users = DB::table('users')->count();
-// $quantitys=Cart::find($id); 
-// if( isset($quantitys->product_id)&& $quantitys->user_id){
-//     $quantitys->quantity=+1;
-//     $cart=new Cart();
-//     $cart->quantity=$quantity;
-//     $cart->save();
+// $idu=Auth::user()->id;
+$check = Cart::where('user_id',$id_user)->orWhere('product_id',$id_product)->count();
+if( $check==1){
+    $quantity= Cart::find('id')->quantity+=1;
+    $cart=new Cart();
+    $cart->quantity=$quantity;
+    $cart->save();
     
-//     return redirect()->route('home', ["carts" => "Đã tăng số lượng giỏ hàng"]);
-// }else{
-//     $cart=new Cart();
-//     $cart->product_id=$id_product;
-//     $cart->user_id=$id_user;
-//     $cart->quantity=1;
-//     $cart->save();
-    
-//     return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
-// }
-
+    return redirect()->route('home', ["carts" => "Đã tăng số lượng giỏ hàng"]);
+}else{
     $cart=new Cart();
     $cart->product_id=$id_product;
     $cart->user_id=$id_user;
     $cart->quantity=1;
     $cart->save();
+    
     return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
+}
+
+    // $cart=new Cart();
+    // $cart->product_id=$id_product;
+    // $cart->user_id=$id_user;
+    // $cart->quantity=1;
+    // $cart->save();
+    // return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
 }
 function destroy($id){
     $cart = Cart::find($id);
@@ -97,13 +92,25 @@ function destroy($id){
     // CART
     function payment()
     {
-        // $idu=Auth::user()->id;
-        // $carts = Cart::where('user_id',$idu)->get();
-        // foreach($carts as $cart){
-        //     $cart->product;
-        // }
+        $idu=Auth::user()->id;
+        $orders = Cart::where('user_id',$idu)->get();
+        $total=0;
 
-        return view('auth.payment',['order'=>"thanh toan"]);
+        $carts=Cart::where('user_id',$idu)->get();
+       foreach($orders as $o)
+       {
+           foreach($o->product as $pro)
+           {
+            $totals = $total+($o->quantity*$pro->price)*(($pro->sale)/100);
+          
+           }
+           
+         
+       }
+        // echo "<pre>".json_encode($orders,JSON_PRETTY_PRINT)."</pre>";
+        return view('auth.payment',['orders'=>" $carts"],['order'=>" $totals"]);
+        //echo $total;
     }
+    
   
 }

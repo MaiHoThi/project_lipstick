@@ -18,13 +18,13 @@
         @include('partials/header')
         @include('partials/menu')
     </div><center>
-            <div style="width: 40%"> 
+            <div class="col-50"> 
    <form action="/auth/login" method="POST" class="login100-form " role="form" >
    @csrf
    <label for="">ĐĂNG NHẬP</label>
        <div class="form-group">
          
-           <input type="email" name="email" class="input-full" placeholder="Email" autocorrect="off" autocapitalize="off" autofocus="">
+           <input type="email" name="email" class="input-full" placeholder="Email" >
 
        </div>
    

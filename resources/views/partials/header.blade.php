@@ -32,16 +32,9 @@
             <li>
 
                 <h5>
-                    <a href="/cart" >
-                        <strong>Giỏ hàng <span style="color: red">
-                            
-                    
+                    <a href="/cart"  class="btn btn-info btn-lg" >
+                        <strong>Giỏ hàng <span style="color: red">            
                         </span></strong><i class="fa fa-shopping-bag" aria-hidden="true" ></i>
-                        <div class="alert alert-warning">
-
-                            <li  class="close" data-dismiss="alert" aria-hidden="true">&times;</li> {{Request::get('message')}}
-                        </div>
-
                     </a>
                 </h5>
             </li>

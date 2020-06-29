@@ -74,36 +74,42 @@
     @csrf
     @foreach ($search as $product)
     
-<div class=" col-sm-3" id="product">
-    <div class="product_block">
-      <span><p></p>
-      <p></p>
-      </span>
-        <div class="product_image">
-          <a href='{{ "/auth/".$product ->id."/detail"}}'>
-    <img src="{{'/storage/'.$product ->image}}" alt="avata">
-          </a>
-    </div>
-    <div class="product_content">
-        <label >{{$product ->title}}</label>
-    </div>
-    <div class="product_price">
-        <p >{{$product ->price}}đ</p>
-    </div>
-    <div class="vote">
-        ===
-    </div>
-    <div class="product_add-t-cart">
-    <form action="{{'/auth/'.$product->id.'/cart'}}" method="get">
-          <button type="submit" class="btn btn-default">Thêm giỏ hàng</button>
-        </form>
-      
+    <div class=" col-sm-3" id="product">
+      <div class="product_block">
+        <span><p></p>
+        <p></p>
+        </span>
+          <div class="product_image">
+           
+            <a href='{{ "/auth/".$product ->id."/detail"}}'>
+      <img src="{{'/storage/'.$product ->image}}" alt="avata">
+            </a>
+      </div>
+      <div class="product_content">
+          <label >{{$product ->name}}</label>
+          <span class="sale">{{$product ->sale}}%</span>
+      </div>
+      <div class="product_price">
+          <p >{{$product->price}}</p>
+      </div>
+      <div class="vote">
+        <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+      </div>
+      <div class="product_add-t-cart">
+      <form action='{{"/auth/".$product->id."/cart"}}' method="get">
+        @csrf
+            <button type="submit" class="btn btn-default">Thêm giỏ hàng</button>
+          </form>
         
-    </div>
-    </div>
-    <p style="color: red;">{{Request::get('message')}}</p>
-</div>
-
+          
+      </div>
+      </div>
+  </div>
+<p>{{Request::get('searchnull')}}</p>
 @endforeach
       
    

@@ -11,8 +11,12 @@ class SearchController extends Controller
     function search(Request $request)
     {
         $q = $request->input('search');
-        $products = DB::table('products')->where('name','LIKE','%'.$q.'%')->orWhere('title','LIKE','%'.$q.'%')->get();
+        $products = DB::table('products')->where('name','LIKE','%'.$q.'%')->orWhere('price','LIKE','%'.$q.'%')->get();
+        if(!$products){
+            return view("auth.search",["searchnull"=>"Không tìm thấy sản phẩm"]);
+        }else{
+            return view("auth.search",["search"=>$products]);
+        }
         
-        return view("auth.search",["search"=>$products]);
     }
 }

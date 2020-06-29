@@ -43,11 +43,13 @@
 
 
                 <tbody>
-                    @foreach ($carts as $item) @csrf
-
+                    @foreach ($carts as $cart) @csrf
+                    @foreach ($cart->product as $item)
+                        
+                  
                    
                     <tr>
-                        <td>{{$item->id}}</td>
+                        <td>{{$cart->id}}</td>
 
 
                        
@@ -56,9 +58,9 @@
                         <td style="width: 100px"> <img src="{{'/storage/'.$item->image}}" alt="anh" style="width: 100%"> </td>
 
                         <td>{{number_format($item->price)}}</td>
-                        <td><input type="number" value="{{$item->quantity}}" name="quantity" id=""></td>
+                        <td><input type="number" value="{{$cart->quantity}}" name="quantity" id=""></td>
                         <?php
-                            $tong=number_format(($item->quantity*$item->price)*(($item->sale)/100));
+                            $tong=number_format(($cart->quantity*$item->price)*(($item->sale)/100));
                         ?>
                         <td>{{$tong}}</td>
 
@@ -73,6 +75,7 @@
 
                     </tr>
 
+                    @endforeach
                     @endforeach
                 </tbody>
 
@@ -95,8 +98,11 @@
                       $total =0;            
                         foreach ($carts as $cal)
                         {    
+                            foreach ($cal->product as $product) {
+                                $total = $total+($cal->quantity*$product->price)*(($product->sale)/100);  
+                            }
                                    
-                           $total = $total+($cal->quantity*$cal->price)*(($cal->sale)/100);    
+                             
                         }
                         echo "<b>". number_format($total)."đ</b>";
                        
@@ -105,7 +111,14 @@
                 
                     </tr>
                     <tr>
-                        <td><button class="btn btn-success" type="button">Thành toán</button></td>
+                      
+                        <td>    
+                        <form action="/payment" method="get">
+                                <button class="btn btn-success" type="submit">Thành toán</button>
+                            </form>
+                          
+                                </td>
+                             
                     </tr>
                 </tbody>
             </table>

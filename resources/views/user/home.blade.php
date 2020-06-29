@@ -89,7 +89,7 @@
           </a>
     </div>
     <div class="product_content">
-        <label >{{$product ->title}}</label>
+        <label >{{$product ->name}}</label>
         <span class="sale">{{$product ->sale}}%</span>
     </div>
     <div class="product_price">

@@ -73,3 +73,4 @@ Route::delete('/delecategory/{id}', "Auth\categoryController@destroy");
 
 // PAYMENT
 Route::get('/payment', "Auth\CartController@payment");
+Route::get('/auth/{id}/payment', "Auth\CartController@payment");
