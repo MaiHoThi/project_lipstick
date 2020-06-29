@@ -1,0 +1,371 @@
+html,
+body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+
+/* menu*/
+
+.menu {
+    margin-top: 34px;
+}
+
+
+/* slde */
+
+
+/* .slide {
+    margin-top: 76px;
+} */
+
+.item {
+    width: 100%;
+    height: 500px;
+}
+
+.carousel-inner .item img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* header */
+
+.logo {
+    width: 100px;
+    height: 50px;
+}
+
+
+/* footer */
+
+footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: 200px;
+    background-color: black;
+    color: white;
+}
+
+.container-fluid {
+    width: 100%;
+    margin-top: 69px;
+    height: auto;
+}
+
+
+/* category */
+
+#menu ul {
+    padding: 10px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-weight: bold;
+}
+
+#menu ul li {
+    display: inline;
+}
+
+#menu {
+    z-index: 1000;
+    position: fixed;
+}
+
+#menu ul a {
+    width: 129px;
+    float: right;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 35px;
+}
+
+
+/* .form-group {
+    width: 50%;
+} */
+
+.container {
+    padding-top: 15px;
+}
+
+.list-inline li a {
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    display: center;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+body {
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+
+/* Toggle Styles */
+
+#viewport {
+    padding-left: 250px;
+    margin-top: 2px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#content {
+    width: 100%;
+    margin-right: 0;
+}
+
+
+/* Sidebar Styles */
+
+#sidebar {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #37474F;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar header {
+    background-color: #263238;
+    font-size: 20px;
+    line-height: 52px;
+    text-align: center;
+}
+
+#sidebar header a {
+    color: #fff;
+    display: block;
+    text-decoration: none;
+}
+
+#sidebar header a:hover {
+    color: #fff;
+}
+
+
+/* #sidebar {
+    position: absolute;
+} */
+
+#sidebar .nav a {
+    background: none;
+    border-bottom: 1px solid #455A64;
+    color: #CFD8DC;
+    font-size: 14px;
+    padding: 16px 24px;
+}
+
+#sidebar .nav a:hover {
+    background: none;
+    color: #ECEFF1;
+}
+
+#sidebar .nav a i {
+    margin-right: 16px;
+}
+
+
+/* .products {
+    display: -ms-inline-grid;
+} */
+
+#product {
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    height: 300px;
+    width: 200px;
+    margin-top: 52px;
+}
+
+.product_block {
+    border: 1px solid;
+    height: 100%;
+}
+
+.product_image img {
+    width: 100%;
+    height: 200px;
+}
+
+.product_add-t-cart button:hover {
+    background-color: brown;
+}
+
+.checked {
+    color: orange;
+}
+
+
+/* insert */
+
+.image_table {
+    height: 50%;
+}
+
+
+/* login */
+
+.login100-form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #f7f7f7;
+    padding: 17px 55px 55px 55px;
+    margin: auto;
+}
+
+
+/* detail */
+
+#detail {
+    margin-top: 91px;
+}
+
+
+/* insert */
+
+.list li {
+    border: 2px solid pink;
+    border-radius: 12px;
+}
+
+
+/* sale */
+
+span.sale {
+    float: left;
+    right: 0px;
+    padding: 5px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0px;
+    background: #ff0000;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'futura-REGULAR', sans-serif;
+    font-weight: 400;
+}
+
+
+/* payment */
+
+.row {
+    display: -ms-flexbox;
+    /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap;
+    /* IE10 */
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+.col-25 {
+    -ms-flex: 25%;
+    /* IE10 */
+    flex: 25%;
+}
+
+.col-50 {
+    -ms-flex: 50%;
+    /* IE10 */
+    flex: 50%;
+}
+
+.col-75 {
+    -ms-flex: 75%;
+    /* IE10 */
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+
+.container {
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+input[type=text] {
+    width: 100%;
+    /* margin-bottom: 20px; */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+
+.order {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.order:hover {
+    background-color: #45a049;
+}
+
+span.price {
+    float: right;
+    color: grey;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
