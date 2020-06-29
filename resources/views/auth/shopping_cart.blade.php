@@ -58,7 +58,7 @@
                         <td style="width: 100px"> <img src="{{'/storage/'.$item->image}}" alt="anh" style="width: 100%"> </td>
 
                         <td>{{number_format($item->price)}}</td>
-                        <td><input type="number" value="{{$cart->quantity}}" name="quantity" id=""></td>
+                        <td><input type="number" value="{{$cart->quantity}}" name="quantity" min="1" id=""></td>
                         <?php
                             $tong=number_format(($cart->quantity*$item->price)*(($item->sale)/100));
                         ?>

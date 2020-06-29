@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use App\Cart;
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\Product;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -33,10 +34,9 @@ if(!Auth::user()){
 }else
     if(Auth::user()->role=='user')
     {
-        $total=0;
+        
     $idUser=Auth::user()->id;
     $products = Cart::where('user_id',$idUser)->get();
- 
            // echo "<pre>".json_encode($products,JSON_PRETTY_PRINT)."</pre>";
              return view("auth.shopping_cart",['carts'=>$products]);
     }else if(Auth::user()->role=='admin'){
@@ -93,23 +93,48 @@ function destroy($id){
     function payment()
     {
         $idu=Auth::user()->id;
-        $orders = Cart::where('user_id',$idu)->get();
-        $total=0;
-
         $carts=Cart::where('user_id',$idu)->get();
-       foreach($orders as $o)
-       {
-           foreach($o->product as $pro)
-           {
-            $totals = $total+($o->quantity*$pro->price)*(($pro->sale)/100);
-          
-           }
-           
-         
-       }
         // echo "<pre>".json_encode($orders,JSON_PRETTY_PRINT)."</pre>";
-        return view('auth.payment',['orders'=>" $carts"],['order'=>" $totals"]);
-        //echo $total;
+        return view('auth.payment',['orders'=> $carts]);
+        
+    }
+    function order(Request $request)
+    {
+       
+            $name = $request->input("name");
+            $email = $request->input("email");
+            $phone = $request->input("phone");
+            $address = $request->input("address");
+            $ship=30000;
+            $code=0;
+            $id_cart=Cart::find('id');
+            // $cart_id= $id_cart->id;
+           $request->validate([
+             'name' => 'required|unique:orders|max:255',
+             'email'=>'required',
+             'phone'=>'required',
+             'address'=>'required',
+         ]);
+     
+           
+           $order = new Order();
+           $order->name=$name;
+           $order->email=$email;
+           $order->phone=$phone;
+           $order->address=$address;
+           $order->ship=$ship;
+           $order->code=$code;
+           $order->cart_id=$id_cart;
+           $order->save();
+           return redirect()->route('bills', ["billso" => "Đặt hàng thành công"]);
+           
+        
+    }
+    function bill($id)
+    {
+        $cart_id=Cart::find($id);
+        $bills=Order::where('cart_id',$cart_id);
+        return view('auth.bill',["bills"=>$bills]);
     }
     
   

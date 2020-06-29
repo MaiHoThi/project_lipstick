@@ -11,6 +11,12 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+      h1{
+           font-family: "Comic Sans MS", cursive, sans-serif;
+           color: pink;
+       }
+   </style>
     <title>User</title>
 </head>
 <body>
@@ -73,14 +79,14 @@
     <div id="viewport" >
   <!-- Content -->
   <div id="content" >
-   
+    <marquee><h1>SỰ QUYẾN RŨ CỦA PHÁI ĐẸP</h1></marquee>
     @csrf
     @foreach ($products as $product)
     
 <div class=" col-sm-3" id="product">
     <div class="product_block">
       <span><p></p>
-      <p></p>
+     
       </span>
         <div class="product_image">
          
@@ -114,12 +120,17 @@
 </div>
 
 @endforeach
-      
+<center>
+  <a class="btn btn-danger" href="/home/?page={{$page-1}}">Previous</a>
+  <a class="btn btn-danger" href="/home/?page={{$page+1}}">Next</a>
+</center>    
    
   </div>
+  
 </div>
     </div>
-
+    
+   
   </section>
   </div>
   @include('partials/footer')

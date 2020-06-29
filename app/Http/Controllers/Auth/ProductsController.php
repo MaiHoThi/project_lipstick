@@ -15,6 +15,24 @@ class ProductsController extends Controller
     function insert(){
     	return view("admin.products.insert");
     }
+    function index(Request $request)
+      {
+      $category= Category::all();
+      $page = $request->page;
+      $product = Product::all()->skip($page * 5)->take(5);
+      if($product->isEmpty())
+      {
+        $photos = Product::all()->take(5);
+        return redirect('/home/?page=0');
+      }
+      else if($page < 0)
+      {
+        $totalPage = round(count(Product::all())/5)-1;
+        return redirect('/home/?page='.$totalPage);
+      }
+      return view("user.home", [ "products" => $product,"cate"=>$category,"page" => $page]);
+      }
+
    
     function table(){
       $products=Product::all();
@@ -33,11 +51,12 @@ class ProductsController extends Controller
     }
 
     
-    function index(){
-      $products=Product::all();
+  //   function index(){
+  //     $products=Product::all();
       
-     return view("user.home", [ "products" => $products]);
-  }
+  //    return view("user.home", [ "products" => $products]);
+     
+  // }
 
     function dashboard(){
         $products = Product::all();
