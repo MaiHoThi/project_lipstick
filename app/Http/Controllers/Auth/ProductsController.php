@@ -42,10 +42,7 @@ class ProductsController extends Controller
     function view()
     { 
       $products=Product::all();
-      foreach($products as $product)
-      {
-        $product->category;
-      }
+      
       return view("admin.products.view",[ "products" => $products]);
         
     }
@@ -138,5 +135,17 @@ function detail($id)
 
 }
 
+// Sort
+function sortBy()
+{
 
+$results = product::all()->sortBy("price");
+return view("admin.products.view",[ "products" => $results]);
+}
+function sortDesc()
+{
+
+$results = product::all()->sortByDesc("price");
+return view("admin.products.view",[ "products" => $results]);
+}
 }

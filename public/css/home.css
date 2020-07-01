@@ -255,6 +255,14 @@ body {
 }
 
 
+/* VIEW */
+
+.sort li {
+    background-color: burlywood;
+    border-radius: 15px;
+}
+
+
 /* sale */
 
 span.sale {

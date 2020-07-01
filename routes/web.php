@@ -82,3 +82,7 @@ Route::get('/auth/bill', "Auth\CartController@orders")->name('bills');
 
 // Products category
 Route::get('/categories/{id}', "User\HomeController@indexCategory");
+
+// Sort
+Route::get('sort/price',"Auth\ProductsController@sortBy");
+Route::get('sortDesc/price',"Auth\ProductsController@sortDesc");

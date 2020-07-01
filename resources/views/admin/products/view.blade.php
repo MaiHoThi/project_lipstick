@@ -25,6 +25,13 @@
                 <li ><a href="/insert">Thêm sản phẩm</a></li>
                 <li ><a href="/view">Xem/Sửa/Xóa sản phấm</a></li>
             </ul>
+            <ul class="list-inline sort">
+                <li ><a href="/sort/price">Sắp xếp tăng dần</a></li>
+                <li ><a href="/sortDesc/price">Sắp xếp giảm dần</a></li>
+            </ul>
+            
+            
+         
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -38,6 +45,7 @@
                         <th>Chi tiết</th>
                         <th>Sửa </th>
                         <th>Xóa </th>
+
                     </tr>
                 </thead>
                 <tbody>
