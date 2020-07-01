@@ -74,9 +74,10 @@ Route::delete('/delecategory/{id}', "Auth\categoryController@destroy");
 // PAYMENT
 Route::get('/payment', "Auth\CartController@payment");
 Route::get('/auth/{id}/payment', "Auth\CartController@payment");
+Route::delete('/bills/{id}', "Auth\CartController@destroyBill");
 
 // BILLS
-Route::post('/bills', "Auth\CartController@order");
+Route::get('/bills', "Auth\CartController@bill");
 Route::get('/auth/bill', "Auth\CartController@orders")->name('bills');
 
 

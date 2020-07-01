@@ -8,6 +8,11 @@ class Order extends Model
 {
     public function bill()
     {
-        return $this->hasMany('App\Bill','order_id','id');
+        return $this->hasMany('App\Product','product_id','id');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id','id');
+    }
+    
 }

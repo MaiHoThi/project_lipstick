@@ -83,12 +83,7 @@ function storecart( $id)
         return redirect("/auth/login");
         }
 
-    // $cart=new Cart();
-    // $cart->product_id=$id_product;
-    // $cart->user_id=$id_user;
-    // $cart->quantity=1;
-    // $cart->save();
-    // return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
+    
 }
 function destroy($id){
     $cart = Cart::find($id);
@@ -105,8 +100,14 @@ function destroy($id){
     }
     function orders()
     {
+       
        $orders=Order::all();
-        return view('auth.bill',['orders'=> $orders]);
+       foreach($orders as $od)
+       {
+           $pro=$od->product;
+       }
+       $products=json_decode($pro);
+        return view('auth.bill',['orders'=> $orders],["products"=>$products]);
         
     }
     function order(Request $request)
@@ -118,7 +119,24 @@ function destroy($id){
             $address = $request->input("address");
             $ship=30000;
             $code=0;
-            
+            $arrays=[];
+            $listarrays=[];
+            $id_user=Auth::user()->id;
+            $carts=Cart::all();
+            foreach($carts as $cart)
+            {
+                foreach($cart->product as $product)
+                { $arrays=array(
+                    'id'=>$product->id,
+                    "name"=>$product->name,
+                    "price"=>$product->price,
+                    "image"=>$product->image,
+                    "quantity"=>$cart->quantity,
+                    "sale"=>$product->sale,
+                  );}
+                array_push($listarrays,$arrays);
+            }
+            $product=json_encode($listarrays);
             // $cart_id= $id_cart->id;
            $request->validate([
              'name' => 'required|unique:orders|max:255',
@@ -135,6 +153,8 @@ function destroy($id){
            $order->address=$address;
            $order->ship=$ship;
            $order->code=$code;
+           $order->user_id=$id_user;
+            $order->product= $product;
            $order->save();
            return redirect()->route('bills', ["billso" => "Đặt hàng thành công"]);
            
@@ -142,15 +162,25 @@ function destroy($id){
     }
     function bill()
     {
-        
-        $bills=Bill::all();
-        foreach($bills as $bill)
+        $orders=Order::all();
+        foreach($orders as $od)
         {
-            $bill->cart;
-            $bill->order;
+            $pro=$od->product;
+            $pro=$od->user;
         }
-        // return view('auth.bill',["bills"=>$bills]);
-         echo "<pre>".json_encode($bills,JSON_PRETTY_PRINT)."</pre>";
+        $products=json_decode($pro);
+        
+       
+        //  return view('auth.bill',["bills"=>$products]);
+         echo "<pre>".json_encode($orders,JSON_PRETTY_PRINT)."</pre>";
+
+    }
+    function destroyBill($id)
+    {
+        
+        $delete=Order::find($id);
+        $delete->delete();
+        return redirect()->route('bills');
 
     }
     
