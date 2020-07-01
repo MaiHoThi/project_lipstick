@@ -20,7 +20,12 @@
 <body>
     <div class="container-fluid" style=" position: relative;margin-top: 79px">
         <div class="header">
-            @include('partials/header') @include('partials/menu')
+            @include('partials/header') 
+            <div class="container menu" >
+                <ul class="list-inline">
+            @include('partials/menu')
+                </ul>
+            </div>
         </div>
         <div class="container">
             <table class="table table-dark">
@@ -67,7 +72,7 @@
                         <td>
 
                             <form action="{{'/carts/'.$item->id}}" method="post">
-                                @csrf @method("DELETE")
+                                @csrf @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Xóa</button>
                             </form>
                         </td>

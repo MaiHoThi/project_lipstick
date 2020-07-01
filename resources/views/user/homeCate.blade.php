@@ -11,16 +11,34 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+      h1{
+           font-family: "Comic Sans MS", cursive, sans-serif;
+           color: pink;
+       }
+   </style>
     <title>User</title>
 </head>
-<body>
-  <div class="container-fluid"  style=" position: relative">
-    @include('partials/header')
-    <div class="container menu" >
-      <ul class="list-inline">
-    @include('partials/menu')
+<body >
+
+  <div class="container-fluid co"  style=" position: relative; margin-top: 79px ">
+    <div class="header">
+      @include('partials/header')
+      <div class="container menu" >
+        <ul class="list-inline">
+          @include('partials/menu') 
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">SẢN PHẨM
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+      <li> @foreach ($categories as $item)
+        <a  href="/categories/{{$item->id}}">{{$item->name}}</a>
+        @endforeach
+      </li>
       </ul>
-    </div>
+    </li>
+  </ul>
+      </div>
     <section >
     <div class="slide">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -35,7 +53,7 @@
           <div class="carousel-inner">
       
             <div class="item active">
-              <img src="/image/quyenru.jpg" alt="" ">
+              <img src="/image/quyenru.jpg" alt="" >
               <div class="carousel-caption">
                 <h3>QUYẾN RŨ</h3>
                
@@ -70,60 +88,63 @@
           </a>
         </div>
       </div>
-    <div class="container-fluid" style="display: center">
-    <div id="viewport" >
+    <div class="" style="display: center">
+    <div id="viewport" class="container">
   <!-- Content -->
   <div id="content" >
-   
+    <marquee><h1>SỰ QUYẾN RŨ CỦA PHÁI ĐẸP</h1></marquee>
     @csrf
-    @foreach ($search as $product)
+    @foreach ($products as $product)
     
-    <div class=" col-sm-3" id="product">
-      <div class="product_block">
-        <span><p></p>
-        <p></p>
-        </span>
-          <div class="product_image">
-           
-            <a href='{{ "/auth/".$product ->id."/detail"}}'>
-      <img src="{{'/storage/'.$product ->image}}" alt="avata">
-            </a>
-      </div>
-      <div class="product_content">
-          <label >{{$product ->name}}</label>
-          <span class="sale">{{$product ->sale}}%</span>
-      </div>
-      <div class="product_price">
-          <p >{{$product->price}}</p>
-      </div>
-      <div class="vote">
-        <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-      </div>
-      <div class="product_add-t-cart">
-      <form action='{{"/auth/".$product->id."/cart"}}' method="get">
-        @csrf
-            <button type="submit" class="btn btn-default">Thêm giỏ hàng</button>
-          </form>
-        
-          
-      </div>
-      </div>
-  </div>
-<p>{{Request::get('searchnull')}}</p>
-@endforeach
+<div class=" col-sm-3" id="product">
+    <div class="product_block">
+      <span><p></p>
+     
+      </span>
+        <div class="product_image">
+         
+          <a href='{{ "/auth/".$product ->id."/detail"}}'>
+    <img src="{{'/storage/'.$product ->image}}" alt="avata">
+          </a>
+    </div>
+    <div class="product_content">
+        <label >{{$product ->name}}</label>
+        <span class="sale">{{$product ->sale}}%</span>
+    </div>
+    <div class="product_price">
+        <p >{{$product->getPrice()}}</p>
+    </div>
+    <div class="vote">
+      <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+    </div>
+    <div class="product_add-t-cart">
+    <form action='{{"/auth/".$product->id."/cart"}}' method="get">
+      @csrf
+          <button type="submit" class="btn btn-default">Thêm giỏ hàng</button>
+        </form>
       
+        
+    </div>
+    </div>
+</div>
+
+@endforeach
+{{-- <center>
+  <a class="btn btn-danger" href="/home/?page={{$page-1}}">Previous</a>
+  <a class="btn btn-danger" href="/home/?page={{$page+1}}">Next</a>
+</center>     --}}
    
   </div>
+  
 </div>
     </div>
-  </section>
- 
+    
    
-
+  </section>
   </div>
   @include('partials/footer')
 </body>

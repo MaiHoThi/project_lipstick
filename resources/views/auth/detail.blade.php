@@ -15,8 +15,11 @@
 <body>
     <div class="container-fluid">
         @include('partials/header') 
+        <div class="container menu" >
+            <ul class="list-inline">
         @include('partials/menu') 
-
+            </ul>
+        </div>
         <div id="detail" class="container">
 <div class="col-md-6 col-sm-6 col-xs-6">
     <img src="{{'/storage/'.$detail->image}}" alt="anh">

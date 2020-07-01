@@ -77,4 +77,8 @@ Route::get('/auth/{id}/payment', "Auth\CartController@payment");
 
 // BILLS
 Route::post('/bills', "Auth\CartController@order");
-Route::get('/auth/bill', "Auth\CartController@bill");
+Route::get('/auth/bill', "Auth\CartController@orders")->name('bills');
+
+
+// Products category
+Route::get('/categories/{id}', "User\HomeController@indexCategory");

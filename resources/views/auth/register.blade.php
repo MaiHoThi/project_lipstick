@@ -16,7 +16,11 @@
 
     <div class="header">
         @include('partials/header')
+        <div class="container menu" >
+            <ul class="list-inline">
         @include('partials/menu')
+            </ul>
+        </div>
     </div>
    
             <div class="container"> 

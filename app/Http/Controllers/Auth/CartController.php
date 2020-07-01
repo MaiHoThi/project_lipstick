@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
+use App\Bill;
 use App\Cart;
 use App\Http\Controllers\Controller;
 use App\Order;
@@ -14,13 +16,13 @@ class CartController extends Controller
 {// SHOPPING CART
 function index()
 {
+    $useri=Auth::user()->id;
+    $id_cart=Cart::find('id')->get();
+   
+        // $id_cart->id->first;
     
-        $id=Auth::user()->id;
-        $carts = Cart::where('user_id',$id)->get();
-        foreach($carts as $cart){
-            $cart->product;
-        }
-         echo"<pre>". json_encode($carts, JSON_PRETTY_PRINT)."</pre>";
+   
+         echo"<pre>". json_encode($id_cart, JSON_PRETTY_PRINT)."</pre>";
 
         // $products = Product::all();
         // return view('auth.shopping_cart',['carts'=>$carts]);
@@ -51,31 +53,35 @@ if(!Auth::user()){
 
 function storecart( $id)
 {
-    // $id_user = User::find('id');
 
-$id_user=Auth::user()->id;
-$product_id= Product::find($id);
-$id_product= $product_id->id;
-// $quantity=1;
+    if(Auth::check()){
 
-// $idu=Auth::user()->id;
-$check = Cart::where('user_id',$id_user)->orWhere('product_id',$id_product)->count();
-if( $check==1){
-    $quantity= Cart::find('id')->quantity+=1;
-    $cart=new Cart();
-    $cart->quantity=$quantity;
-    $cart->save();
-    
-    return redirect()->route('home', ["carts" => "Đã tăng số lượng giỏ hàng"]);
-}else{
-    $cart=new Cart();
-    $cart->product_id=$id_product;
-    $cart->user_id=$id_user;
-    $cart->quantity=1;
-    $cart->save();
-    
-    return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
-}
+        $idUser = Auth::user()->id;
+        
+        $check = DB::table('carts')
+        ->where('product_id', $id)
+        ->where('user_id', $idUser)
+        ->count();
+        
+        if ($check == 1) {
+        $quantity = DB::table('carts')
+        ->where('product_id', $id)
+        ->where('user_id', $idUser)
+        ->value('quantity') + 1;
+        
+        DB::table('carts')
+        ->where('product_id', $id)
+        ->where('user_id', $idUser)
+        ->update(["quantity" => $quantity]);
+        return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
+        } else {
+        DB::table('carts')->insert(["product_id" => $id, "quantity" => 1, "user_id" => $idUser]);
+        return redirect()->route('home', ["carts" => "Thêm vào giỏ hàng Thành Công"]);
+        }
+        }
+        else{
+        return redirect("/auth/login");
+        }
 
     // $cart=new Cart();
     // $cart->product_id=$id_product;
@@ -89,13 +95,18 @@ function destroy($id){
     $cart->delete();
     return redirect()->route('cart');
     }
-    // CART
+    // ORDER
     function payment()
     {
         $idu=Auth::user()->id;
         $carts=Cart::where('user_id',$idu)->get();
-        // echo "<pre>".json_encode($orders,JSON_PRETTY_PRINT)."</pre>";
         return view('auth.payment',['orders'=> $carts]);
+        
+    }
+    function orders()
+    {
+       $orders=Order::all();
+        return view('auth.bill',['orders'=> $orders]);
         
     }
     function order(Request $request)
@@ -107,7 +118,7 @@ function destroy($id){
             $address = $request->input("address");
             $ship=30000;
             $code=0;
-            $id_cart=Cart::find('id');
+            
             // $cart_id= $id_cart->id;
            $request->validate([
              'name' => 'required|unique:orders|max:255',
@@ -124,17 +135,23 @@ function destroy($id){
            $order->address=$address;
            $order->ship=$ship;
            $order->code=$code;
-           $order->cart_id=$id_cart;
            $order->save();
            return redirect()->route('bills', ["billso" => "Đặt hàng thành công"]);
            
         
     }
-    function bill($id)
+    function bill()
     {
-        $cart_id=Cart::find($id);
-        $bills=Order::where('cart_id',$cart_id);
-        return view('auth.bill',["bills"=>$bills]);
+        
+        $bills=Bill::all();
+        foreach($bills as $bill)
+        {
+            $bill->cart;
+            $bill->order;
+        }
+        // return view('auth.bill',["bills"=>$bills]);
+         echo "<pre>".json_encode($bills,JSON_PRETTY_PRINT)."</pre>";
+
     }
     
   

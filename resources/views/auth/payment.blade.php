@@ -16,7 +16,11 @@
 
     <div class="header" >
         @include('partials/header')
+        <div class="container menu" >
+          <ul class="list-inline">
         @include('partials/menu')
+          </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col-75">
@@ -66,13 +70,13 @@
                   </div>
                   <label for="cname">Mã giảm giá</label>
                   <input type="text" id="cname" name="code" placeholder="Nhập mã giảm giá nếu có"><button type="submit"></button>
-                <p class="price" style="color: red">Tổng giá:{{number_format($total)đ}}</p>
+                <p class="price" style="color: red">Tổng giá:{{number_format($total)}}đ</p>
                 </div>
               </div>
               <label>
                 <input type="checkbox" checked="checked" name="sameadr"> Ship trực tiếp
               </label>
-              <input type="submit" value="Đặt hàng" class="btn order">
+                       <input type="submit" value="Đặt hàng" class="btn order">             
             </form>
           </div>
         </div>

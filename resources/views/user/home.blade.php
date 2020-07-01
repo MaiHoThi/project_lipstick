@@ -19,12 +19,27 @@
    </style>
     <title>User</title>
 </head>
-<body>
+<body >
 
-  <div class="container-fluid co"  style=" position: relative; margin-top: 79px">
+  <div class="container-fluid co"  style=" position: relative; margin-top: 79px ">
     <div class="header">
       @include('partials/header')
-      @include('partials/menu')
+      <div class="container menu" >
+        <ul class="list-inline">
+          @include('partials/menu') 
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">SẢN PHẨM
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+      <li> @foreach ($categories as $item)
+        <a  href="/categories/{{$item->id}}">{{$item->name}}</a>
+        @endforeach
+      </li>
+      </ul>
+    </li>
+  </ul>
+  </div>
+      
   </div>
     <section >
     <div class="slide">
@@ -76,7 +91,7 @@
         </div>
       </div>
     <div class="" style="display: center">
-    <div id="viewport" >
+    <div id="viewport"  class="container">
   <!-- Content -->
   <div id="content" >
     <marquee><h1>SỰ QUYẾN RŨ CỦA PHÁI ĐẸP</h1></marquee>
@@ -120,19 +135,21 @@
 </div>
 
 @endforeach
-<center>
-  <a class="btn btn-danger" href="/home/?page={{$page-1}}">Previous</a>
-  <a class="btn btn-danger" href="/home/?page={{$page+1}}">Next</a>
-</center>    
-   
+
   </div>
-  
+      
+     
 </div>
     </div>
     
    
   </section>
+  
   </div>
+  <center>
+    <a class="btn btn-danger" href="/home/?page={{$page-1}}">Previous</a>
+    <a class="btn btn-danger" href="/home/?page={{$page+1}}">Next</a>
+  </center>
   @include('partials/footer')
 </body>
 </html>

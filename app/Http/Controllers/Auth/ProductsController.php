@@ -19,18 +19,18 @@ class ProductsController extends Controller
       {
       $category= Category::all();
       $page = $request->page;
-      $product = Product::all()->skip($page * 5)->take(5);
+      $product = Product::all()->skip($page * 5)->take(7);
       if($product->isEmpty())
       {
-        $photos = Product::all()->take(5);
+        $photos = Product::all()->take(7);
         return redirect('/home/?page=0');
       }
       else if($page < 0)
       {
-        $totalPage = round(count(Product::all())/5)-1;
+        $totalPage = round(count(Product::all())/7)-1;
         return redirect('/home/?page='.$totalPage);
       }
-      return view("user.home", [ "products" => $product,"cate"=>$category,"page" => $page]);
+      return view("user.home",[ "products" => $product,"categories"=>$category,"page" => $page]);
       }
 
    

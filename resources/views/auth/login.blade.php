@@ -16,7 +16,11 @@
 
     <div class="header">
         @include('partials/header')
+        <div class="container menu" >
+            <ul class="list-inline">
         @include('partials/menu')
+            </ul>
+        </div>
     </div><center>
             <div class="col-50"> 
    <form action="/auth/login" method="POST" class="login100-form " role="form" >
