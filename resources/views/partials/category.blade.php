@@ -38,7 +38,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/admin/bills">
           <i class="zmdi zmdi-calendar"></i> Quản lý đơn hàng
         </a>
       </li>

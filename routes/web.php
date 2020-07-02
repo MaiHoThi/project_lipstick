@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/404', function (){
+    return abort(404);
+});
+Route::get('/401', function (){
+    return abort(401);
+})->name('401');
+
 //login
  Route::get('/auth/login',"Auth\LoginController@index")->name("auth.login");
  Route::post('/auth/login',"Auth\LoginController@login");
@@ -26,7 +33,7 @@ Route::get('/register',"Auth\RegisterController@index");
 
 Route::post('/auth/register',"Auth\RegisterController@register");
 //dashboard
-Route::get('/admin/dashboard',"Admin\DashboardController@index");
+Route::get('/admin/dashboard',"Admin\DashboardController@index")->middleware("Middleware");
 //user
 Route::get('/home',"Auth\ProductsController@index")->name('home');
 //auth
@@ -73,11 +80,11 @@ Route::delete('/delecategory/{id}', "Auth\categoryController@destroy");
 
 // PAYMENT
 Route::get('/payment', "Auth\CartController@payment");
-Route::get('/auth/{id}/payment', "Auth\CartController@payment");
 Route::delete('/bills/{id}', "Auth\CartController@destroyBill");
 
 // BILLS
-Route::get('/bills', "Auth\CartController@bill");
+Route::post('/bills', "Auth\CartController@order");
+Route::get('/admin/bills', "Auth\CartController@bill");
 Route::get('/auth/bill', "Auth\CartController@orders")->name('bills');
 
 

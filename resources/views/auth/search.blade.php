@@ -70,7 +70,9 @@
           </a>
         </div>
       </div>
-    <div class="container-fluid" style="display: center">
+      <div class="container-fluid" style="display: center">
+        <h1 style="color: red">{{Request::get('searchnull')}}</h1>  
+
     <div id="viewport" >
   <!-- Content -->
   <div id="content" >

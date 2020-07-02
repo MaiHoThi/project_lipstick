@@ -20,7 +20,6 @@
     <title>User</title>
 </head>
 <body >
-
   <div class="container-fluid co"  style=" position: relative; margin-top: 79px ">
     <div class="header">
       @include('partials/header')
@@ -39,7 +38,6 @@
     </li>
   </ul>
   </div>
-      
   </div>
     <section >
     <div class="slide">
@@ -49,6 +47,7 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
           </ol>
       
           <!-- Wrapper for slides -->
@@ -75,6 +74,12 @@
                 <h3>CÁ TÍNH</h3>
                
               </div>
+              <div class="item">
+                <img src="/image/back.jpg" alt="" >
+                <div class="carousel-caption">
+                  <h3>CÁ TÍNH</h3>
+                 
+                </div>
             </div>
         
           </div>
@@ -91,10 +96,11 @@
         </div>
       </div>
     <div class="" style="display: center">
-    <div id="viewport"  class="container">
+    <div id="viewport"  >
   <!-- Content -->
   <div id="content" >
     <marquee><h1>SỰ QUYẾN RŨ CỦA PHÁI ĐẸP</h1></marquee>
+    
     @csrf
     @foreach ($products as $product)
     

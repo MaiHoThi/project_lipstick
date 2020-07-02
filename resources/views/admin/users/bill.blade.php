@@ -4,12 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Latest compiled and minified CSS & JS -->
-    <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/home.css">
+    {{-- <link rel="stylesheet" href="/css/home.css"> --}}
+    <style>
+        table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table .head{
+    background-color: limegreen;
+    color: aliceblue;
+}
+table .body{
+    background-color:bisque;
+    color: black;
+}
+th, td {
+  padding: 5px;
+  text-align: left; 
+  
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+    </style>
     <title>View</title>
 </head>
 
@@ -17,61 +35,67 @@
     <div class="container-fluid" style=" position: relative">
         @include('partials/header')
         <div class="container" >
-            
             <div id="viewport">
                 @include('partials/category')
-        <div class="table-responsive">
+                <h1>Hóa đơn đặt hàng</h1>
+        <div class="table">
+            <table style="width:100%">
+                <tr class="head">
+                    <th>id</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Sản phẩm</th>
+                    <th>Ship hàng</th>
+                </tr>
+                <tr class="body">
+                    @foreach ($customer as $cus)
+                    <td>{{$cus->id}}</td> 
+                    <td>{{$cus->name}}</td> 
+                    <td>{{$cus->email}}</td> 
+                    <td>{{$cus->phone}}</td> 
+                    <td>{{$cus->address}}</td> 
 
-            <ul class="list-inline sort">
-                <li ><a href="/sort/price">Sắp xếp tăng dần</a></li>
-                <li ><a href="/sortDesc/price">Sắp xếp giảm dần</a></li>
-            </ul>
-          <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Tên khách hàng</th>
-                        <th>Email</th>
-                        <th>Số điện thoại</th>
-                        <th>Địa chỉ</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Hình ảnh</th>
-                        <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th>Khuyến mãi</th>
-                        <th>Tổng giá</th>
-                        <th>Sửa </th>
-                        <th>Xóa </th>
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @csrf @foreach ($products as $item)
-                    <tr>
-                        <td>{{$item->id}}</td>
-
-                        <td>{{$item->category->name}}</td>
-
-                        <td>{{$item->name}}</td>
-                        <td style="width: 50px;height: 100px;"><img  src="{{'/storage/'.$item ->image}}" alt="image" class="image_table"></td>
-                        <td>{{$item->getPrice()}}</td>
-                        <td style="color: red">{{$item->sale}}%</td>
-                        <td>{{$item->status}}</td>
-                        <td>{{$item->description}}</td>
-                        <td>
-                            <form action='{{ "/index/".$item ->id."/edit"}}' method="GET" class="group-inline">
-                                <button type="submit">Sửa</button></form>
-                        </td>
-                        <td>
-                            <form action='{{ "/products/".$item ->id}}' method="POST" class="group-inline">
+                 @endforeach
+                
+                 <td >
+                    @foreach ($bills as $item)
+                 <p>Ảnh:<img style="height: 50px;" src="{{'/storage/'.$item->image}}" alt=""></p> 
+                 <p>Tên:{{$item->name}}</p> 
+                 <p>Số lượng{{$item->quantity}}</p>
+                 @endforeach
+               
+                </td> 
+            <td>{{ $ship=number_format($cus->ship)}}</td>
+                </tr>
+                <tr >
+                    <td style="background-color:darkseagreen;color: black" colspan="6" rowspan="2">
+                        <strong>
+                            Thành toán:   
+                            <?php 
+                            $total=0;      
+                          foreach($bills as $pro)
+                          {
+                             $totals = number_format($cus->ship+$total+($pro->quantity*$pro->price)*(($pro->sale)/100));
+                          }
+                          echo $totals."đ";
+                          ?>
+                     
+                        </strong></td>
+                        <td style="color: black">
+                            <form action='{{ "/products/".$cus ->id}}' method="POST" class="group-inline">
                                 @csrf @method("DELETE")
-                                <button type="submit">Xóa</button></form>
+                                <button type="submit" style="background-color: red">Xóa</button>
+                            </form>
+                            <form action='{{ "/products/".$cus ->id}}' method="POST" class="group-inline">
+                                @csrf 
+                                <button type="submit" style="background-color: green">Xác nhận</button></form>  
                         </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                  </tr>
+              </table>
+                     
+                
     </div>
             </div>
         </div>

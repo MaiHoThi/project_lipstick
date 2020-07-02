@@ -23,6 +23,7 @@
         </div>
     </div><center>
             <div class="col-50"> 
+                <p style="color: red">{{Request::get('message')}}</p>  
    <form action="/auth/login" method="POST" class="login100-form " role="form" >
    @csrf
    <label for="">ĐĂNG NHẬP</label>

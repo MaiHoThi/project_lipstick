@@ -1,5 +1,13 @@
-
-<footer class="page-footer font-small blue pt-4" >
+<style>
+  ul li a{
+    color: black;
+  }
+  ul li a i{
+   width: 20px;
+   color: deepskyblue;
+  }
+</style>
+<footer class="" >
 
     <!-- Footer Links -->
     <div class="container-fluid text-center text-md-left">
@@ -8,7 +16,7 @@
       <div class="row">
   
         <!-- Grid column -->
-        <div class="col-md-6 mt-md-0 mt-3">
+        <div class="col-md-3 mt-md-0 mt-3">
   
           <!-- Content -->
           <h5 class="text-uppercase">THƯƠNG HIỆU SON CAO CẤP</h5>
@@ -51,21 +59,43 @@
   
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="#!">Hướng dẫn mua hàng</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="#!">Hình thức vận chuyển</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="#!">Chính sách đổi trả</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="#!"> Điều khoản sử dụng</a>
             </li>
+          </li>
+          <li>
+            <a href="#!"> Chính sách bảo mật</a>
+          </li>
           </ul>
   
         </div>
-        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3">
+  
+          <!-- Links -->
+          <h5 class="text-uppercase">Dịch Vụ Khách Hàng</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Trang Chủ</a>
+            </li>
+            <li>
+              <a href="#!">Son Môi</a>
+            </li>
+            <li>
+              <a href="#!">Liên Hệ</a>
+            </li>
+          
+          </ul>
+  
+        </div>
   
       </div>
       <!-- Grid row -->

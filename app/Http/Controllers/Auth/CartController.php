@@ -32,7 +32,7 @@ function index()
 function Shoppingcart()
 {
 if(!Auth::user()){
-    return redirect()->route("home",["message"=>"Bạn cần phải đăng nhập hoặc đăng ký để xem giỏ hàng"]);
+    return redirect()->route("auth.login",["message"=>"Bạn cần phải đăng nhập hoặc đăng ký để xem giỏ hàng"]);
 }else
     if(Auth::user()->role=='user')
     {
@@ -100,15 +100,23 @@ function destroy($id){
     }
     function orders()
     {
-       
-       $orders=Order::all();
+        if(!Auth::user()){
+            return redirect()->route("401",["messageorders"=>"Bạn cần phải đăng nhập hoặc đăng ký để xem đơn hàng"]);
+        }else
+            if(Auth::user()->role=='user')
+            {
+       $id_user=Auth::user()->id;
+       $orders=Order::Where('user_id','=',$id_user)->get();
        foreach($orders as $od)
        {
            $pro=$od->product;
        }
        $products=json_decode($pro);
-        return view('auth.bill',['orders'=> $orders],["products"=>$products]);
-        
+        return view('auth.bill',['orders'=> $orders],["bills"=>$products]);
+    }else{
+        return redirect()->route("home");
+    }
+  
     }
     function order(Request $request)
     {
@@ -162,17 +170,14 @@ function destroy($id){
     }
     function bill()
     {
-        $orders=Order::all();
+       $orders=Order::all();
         foreach($orders as $od)
         {
             $pro=$od->product;
-            $pro=$od->user;
+            // $pro=$od->user;
         }
         $products=json_decode($pro);
-        
-       
-        //  return view('auth.bill',["bills"=>$products]);
-         echo "<pre>".json_encode($orders,JSON_PRETTY_PRINT)."</pre>";
+          return view('admin.users.bill',["customer"=>$orders],["bills"=>$products]);
 
     }
     function destroyBill($id)

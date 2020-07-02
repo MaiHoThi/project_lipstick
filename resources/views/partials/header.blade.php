@@ -2,14 +2,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    <style> 
+        input[type=text] {
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+</style>
 <div id="menu">
     <header>
         <ul>
             <li><img src="/image/lipstick.jpg" alt="logo" name="logo" class="logo"></li>
             <li>
                 <form class="form-inline" action="/products/search" role="search">
-                    <!-- <i class="fas fa-search" aria-hidden="true"></i> -->
-                    <input class="form-control " type="text" placeholder="Tìm kiếm" aria-label="Search" name="search"><button class="btn btn-outline-success  my-sm-0" type="submit">Search</button>
+                    <input type="text" name="search" placeholder="Tìm kiếm.." >
+                 
                 </form>
             </li>
             <li style="display: flex">

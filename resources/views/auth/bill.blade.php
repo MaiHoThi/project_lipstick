@@ -24,6 +24,11 @@
 </head>
 
 <body>
+    {{-- @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+  @endif --}}
     <div class="container-fluid" style="">
 
         <div class="header">
@@ -58,7 +63,7 @@
                                     </thead>
                                     <tbody>
                     
-                                        @csrf @foreach ($products as $pro)
+                                         @foreach($bills as $pro)
                                         <tr>
                                             <td style="height: 50%;"><img  src="{{'/storage/'.$pro ->image}}" alt="image" class="image_table"></td>
 
@@ -72,7 +77,7 @@
                                       
                                             <?php 
                                             $total=0;      
-                                          foreach($products as $pro)
+                                          foreach($bills as $pro)
                                           {
                                                $totals = number_format($total+($pro->quantity*$pro->price)*(($pro->sale)/100));
                                           }
@@ -82,7 +87,8 @@
                                     </tbody>
                                 </table>
                                 <p>Tổng giá: {{$totals}}đ</p>
-                                <p>Ship:{{$item->ship}}đ</p>
+                                <p>Ship:{{ $item->ship}}đ</p>
+                                <p>Thành toán:{{number_format($item->ship+$total+($pro->quantity*$pro->price)*(($pro->sale)/100))}}đ</p>
                                 
                                 </div>
                            

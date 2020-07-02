@@ -31,22 +31,22 @@
                 <div class="col-50">
                   <h3>Thành toán hóa đơn</h3>
                   <label for="fname"><i class="fa fa-user"></i> Họ và tên:</label>
-                  <input type="text" id="fname" name="name" placeholder="Nhập họ và tên">
+                <input type="text" id="fname" name="name" placeholder="Nhập họ và tên" value="{{old('name')}}">
                   @error('name')
                   <div class="alert alert-success">{{ $message }}</div>
                   @enderror
                   <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                  <input type="text" id="email" name="email" placeholder="Đăng nhập email">
+                  <input type="text" id="email" name="email" placeholder="Đăng nhập email" value="{{old('email')}}">
                   @error('email')
                   <div class="alert alert-success">{{ $message }}</div>
                   @enderror
                   <label for="email"><i class="fa fa-envelope"></i> Số điện thoại</label>
-                  <input type="text" id="phone" name="phone" placeholder="Đăng nhập số điện thoại">
+                  <input type="text" id="phone" name="phone" placeholder="Đăng nhập số điện thoại" value="{{old('phone')}}"> 
                   @error('phone')
                   <div class="alert alert-success">{{ $message }}</div>
                   @enderror
                   <label for="adr"><i class="fa fa-address-card-o"></i> Địa chỉ</label>
-                  <input type="text" id="adr" name="address" placeholder="Nhập đỉa chỉ">
+                  <input type="text" id="adr" name="address" placeholder="Nhập đỉa chỉ" value="{{old('address')}}">
                   @error('address')
                   <div class="alert alert-success">{{ $message }}</div>
                   @enderror

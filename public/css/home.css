@@ -8,6 +8,8 @@ body {
     margin: 0;
 }
 
+.search {}
+
 
 /* menu*/
 
@@ -49,8 +51,8 @@ footer {
     position: relative;
     height: 200px;
     margin-top: 200px;
-    background-color: black;
-    color: white;
+    background-color: #f4f4f4;
+    color: black;
 }
 
 .container-fluid {
